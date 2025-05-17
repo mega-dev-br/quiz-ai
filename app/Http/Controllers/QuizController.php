@@ -9,9 +9,11 @@ class QuizController extends Controller
 {
   public function index()
   {
-    if (Gate::denies('test-permissions')) {
+    if (Gate::denies('test-permission')) {
       dd('não autorizado');
     }
-    dd('autorizado');
+
+
+    return view('quiz.index');
   }
 }
