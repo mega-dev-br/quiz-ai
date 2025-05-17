@@ -9,26 +9,27 @@ use Laravel\WorkOS\WorkOS;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
+  /**
+   * Register any application services.
+   */
+  public function register(): void
+  {
+    //
+  }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        Gate::before(function (User $user, string $ability) {
-            $workos = new WorkOS();
-            $accessToken = $workos::decodeAccessToken(session('workos_access_token'));
-            $permissions = $accessToken['permissions'] ?? [];
-            if (in_array($ability, $permissions)) {
-                return true;
-            }
-        });
-    }
+  /**
+   * Bootstrap any application services.
+   */
+  public function boot(): void
+  {
+    Gate::before(function (User $user, string $ability) {
+      $workos = new WorkOS();
+      $accessToken = $workos::decodeAccessToken(session('workos_access_token'));
+      $permissions = $accessToken['permissions'] ?? [];
+
+      if (in_array($ability, $permissions)) {
+        return true;
+      }
+    });
+  }
 }

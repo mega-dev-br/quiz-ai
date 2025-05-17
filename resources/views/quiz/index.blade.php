@@ -1,3 +1,3 @@
 <x-layouts.app :title="__('Dashboard')">
-  xxx
+  index
 </x-layouts.app>

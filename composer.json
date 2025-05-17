@@ -13,8 +13,9 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "laravel/workos": "^0.1.0",
-        "livewire/flux": "^2.1.1",
+        "livewire/flux": "^2.1",
         "livewire/volt": "^1.7.0",
+        "smalot/pdfparser": "^2.12",
         "workos/workos-php-laravel": "^4.1"
     },
     "require-dev": {

@@ -20,13 +20,16 @@
           {{ __('Dashboard') }}
         </flux:navlist.item>
 
-        <flux:navlist.group expandable heading="{{ __('Quiz Inteligente') }}" class="grid">
-          <flux:navlist.item icon="question-circle" href="{{ route('quiz.index') }}">
-            Novo Quiz
+        <flux:navlist.group expandable :open="request()->routeIs('quiz.*')" heading="{{ __('Quiz Inteligente') }}"
+          class="grid">
+          <flux:navlist.item icon="question-circle" :href="route('quiz.create')"
+            :current="request()->routeIs('quiz.create')" wire:navigate>
+            {{ __('Novo Quiz') }}
           </flux:navlist.item>
 
-          <flux:navlist.item icon="question-circle" href="#">
-            Listar Quizzes
+          <flux:navlist.item icon="question-circle" :href="route('quiz.index')"
+            :current="request()->routeIs('quiz.index')" wire:navigate>
+            {{ __('Listar Quizzes') }}
           </flux:navlist.item>
         </flux:navlist.group>
       </flux:navlist.group>
