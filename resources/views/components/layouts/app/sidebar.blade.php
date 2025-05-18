@@ -22,14 +22,14 @@
 
         <flux:navlist.group expandable :open="request()->routeIs('quiz.*')" heading="{{ __('Quiz Inteligente') }}"
           class="grid">
-          <flux:navlist.item icon="question-circle" :href="route('quiz.create')"
-            :current="request()->routeIs('quiz.create')" wire:navigate>
-            {{ __('Novo Quiz') }}
+          <flux:navlist.item icon="question-circle" :href="route('quiz.my-quizzes')"
+            :current="request()->routeIs('quiz.my-quizzes')" wire:navigate>
+            {{ __('Meus Quizzes') }}
           </flux:navlist.item>
 
           <flux:navlist.item icon="question-circle" :href="route('quiz.index')"
             :current="request()->routeIs('quiz.index')" wire:navigate>
-            {{ __('Listar Quizzes') }}
+            {{ __('Todos os Quizzes') }}
           </flux:navlist.item>
         </flux:navlist.group>
       </flux:navlist.group>

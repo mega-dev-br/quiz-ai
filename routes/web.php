@@ -16,7 +16,7 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function ()
   // ===== Quiz routes ===== //
   Route::group(['prefix' => 'quiz/', 'as' => 'quiz.'], function () {
     Route::get('index', [QuizController::class, 'index'])->name('index');
-    Route::get('create', [QuizController::class, 'create'])->name('create');
+    Route::get('my-quizzes', [QuizController::class, 'myQuizzes'])->name('my-quizzes');
     Route::post('store', [QuizController::class, 'store'])->name('store');
     Route::get('show/{id}', [QuizController::class, 'show'])->name('show');
     Route::get('edit/{id}', [QuizController::class, 'edit'])->name('edit');
