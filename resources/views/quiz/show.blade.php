@@ -1,4 +1,9 @@
-<x-layouts.app.quiz :title="$quiz->title" :quiz="$quiz" {{-- Passa $quiz também para o layout --}}>
-  {{-- Aqui apenas invocamos o Livewire, que recebe $quiz novamente --}}
-  <livewire:quiz-show :quiz="$quiz" />
+<x-layouts.app.quiz :title="__('Quiz AI')">
+
+  <x-slot name="content">
+
+    <livewire:quiz-show />
+
+  </x-slot>
+
 </x-layouts.app.quiz>

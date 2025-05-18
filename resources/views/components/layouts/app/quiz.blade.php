@@ -1,14 +1,15 @@
-@props(['title','quiz'])
+<!DOCTYPE html>
+<html lang="pt_BR">
 
-<x-layouts.app :title="$title">
-  <div class="container mx-auto my-8">
-    {{-- Você pode exibir algum resumo do $quiz aqui, se quiser --}}
-    <header class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
-        {{ $quiz->title }}
-      </h1>
-    </header>
+<head>
+  @include('partials.head')
+</head>
 
-    {{ $slot }}
-  </div>
-</x-layouts.app>
+<body
+  class="min-h-screen bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100 flex items-center justify-center p-4">
+
+  {{ $content }}
+
+</body>
+
+</html>
