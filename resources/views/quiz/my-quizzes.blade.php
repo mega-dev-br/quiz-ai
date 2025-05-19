@@ -6,14 +6,54 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {{-- coluna do input file --}}
-        <div class="flex justify-center items-center">
-          <input id="pdf" name="pdf" type="file" accept="application/pdf" class="block w-full text-sm text-gray-500
-                     file:mr-4 file:py-2 file:px-4
-                     file:rounded-full file:border-0
-                     file:bg-blue-600 file:text-white
-                     file:font-semibold
-                     hover:file:bg-blue-500
-                     focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        <div class="flex flex-col justify-center items-center gap-4 w-full">
+          <flux:input id="title" name="title" type="text" placeholder="Título do Quiz"
+            class="w-full text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+          @error('title')
+          <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+          @enderror
+
+          <div class="flex w-full gap-4">
+            <div class="w-1/2">
+              <flux:select id="category" name="category" placeholder="Selecione a categoria..." class="w-full text-sm"
+                required>
+                @foreach ($categories as $category)
+                <flux:select.option value="{{ $category->id }}">
+                  {{ $category->description }}
+                </flux:select.option>
+                @endforeach
+              </flux:select>
+              @error('category')
+              <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <div class="w-1/2">
+              <flux:select id="difficulty" name="difficulty" placeholder="Selecione a dificuldade..."
+                class="w-full text-sm" required>
+                @foreach ($difficulties as $difficulty)
+                <flux:select.option value="{{ $difficulty->id }}">
+                  {{ $difficulty->description }}
+                </flux:select.option>
+                @endforeach
+              </flux:select>
+              @error('difficulty')
+              <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+              @enderror
+            </div>
+          </div>
+
+          <input id="pdf" name="pdf" type="file" accept="application/pdf" class="
+              block w-full text-sm
+              text-gray-700 bg-blue-100 rounded-md
+              dark:text-gray-200 dark:bg-zinc-800
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-md file:border-0
+              file:bg-blue-600 dark:file:bg-blue-500
+              file:text-white file:font-semibold
+              file:hover:bg-blue-500 dark:file:hover:bg-blue-400
+              focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-300
+            " />
           @error('pdf')
           <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
           @enderror
@@ -21,14 +61,13 @@
 
         {{-- coluna do botão, ocupa todo o espaço --}}
         <div class="flex">
-          <button type="submit" class="w-full h-48 flex items-center justify-center
-                     bg-blue-600 hover:bg-blue-500 text-white font-medium
-                     rounded-lg shadow-sm text-lg
-                     focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <button type="submit"
+            class="w-full h-36 flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
             {{ __('Enviar e Gerar Quiz') }}
           </button>
         </div>
       </div>
+
     </form>
   </div>
 
