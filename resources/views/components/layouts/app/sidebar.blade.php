@@ -20,8 +20,8 @@
           {{ __('Dashboard') }}
         </flux:navlist.item>
 
-        <flux:navlist.group expandable :open="request()->routeIs('quiz.*')" heading="{{ __('Quiz Inteligente') }}"
-          class="grid">
+        <flux:navlist.group expandable :open="request()->routeIs(['quiz.*', 'open-ai.*'])"
+          heading="{{ __('Quiz Inteligente') }}" class="grid">
 
           <flux:navlist.item icon="archive-box" :href="route('quiz.index')" :current="request()->routeIs('quiz.index')"
             wire:navigate>
@@ -31,6 +31,11 @@
           <flux:navlist.item icon="bolt" :href="route('quiz.my-quizzes')"
             :current="request()->routeIs('quiz.my-quizzes')" wire:navigate>
             {{ __('Meus Quizzes') }}
+          </flux:navlist.item>
+
+          <flux:navlist.item icon="folder-git-2" :href="route('open-ai.list')"
+            :current="request()->routeIs('open-ai.list')" wire:navigate>
+            {{ __('Arquivos na OpenAI') }}
           </flux:navlist.item>
 
         </flux:navlist.group>
@@ -147,6 +152,10 @@
   {{ $slot }}
 
   @fluxScripts
+
+  @stack('scripts')
+
+  @livewireScripts
 </body>
 
 </html>

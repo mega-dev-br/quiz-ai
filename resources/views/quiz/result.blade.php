@@ -42,41 +42,34 @@
           </div>
 
           {{-- Detalhes das Perguntas --}}
+          {{-- Detalhes das Perguntas na ordem respondida --}}
           <div class="space-y-4">
-            @foreach($attempt->quiz->questions as $i => $question)
+            @foreach($questions as $i => $q)
             @php
-            $userAnswer = $attempt->answers->firstWhere('question_id', $question->id);
-            $correctId = $question->options->firstWhere('is_correct', true)->id;
-            $isCorrect = optional($userAnswer)->option_id === $correctId;
+            $isCorrect = $q->userAnswer === $q->correctId;
             @endphp
 
             <div @class([ 'p-4 rounded-lg border-l-4 bg-zinc-50 dark:bg-zinc-900' , 'border-green-500'=> $isCorrect,
-              'border-red-500' => ! $isCorrect,
+              'border-red-500' => !$isCorrect,
               ])>
               <p class="font-semibold dark:text-gray-100 mb-2">
-                {{ $i + 1 }}. {{ $question->text }}
+                {{ $i + 1 }}. {{ $q->text }}
               </p>
               <ul class="space-y-1 ml-4">
-                @foreach($question->options as $opt)
+                @foreach($q->options as $opt)
                 @php
-                $selected = optional($userAnswer)->option_id === $opt->id;
-                $classes = $opt->is_correct
+                $selected = $opt->id === $q->userAnswer;
+                $classes = $opt->id === $q->correctId
                 ? 'text-green-600 dark:text-green-400 font-medium'
                 : ($selected
                 ? 'text-red-600 dark:text-red-400 line-through'
                 : 'text-gray-700 dark:text-gray-300');
                 @endphp
                 <li class="flex items-center space-x-2 {{ $classes }}">
-                  @if($opt->is_correct)
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
+                  @if($opt->id === $q->correctId)
+                  <svg class="h-5 w-5" …>…</svg>
                   @elseif($selected)
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <svg class="h-5 w-5" …>…</svg>
                   @else
                   <span class="inline-block w-5"></span>
                   @endif

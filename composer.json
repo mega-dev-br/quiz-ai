@@ -15,7 +15,9 @@
         "laravel/workos": "^0.1.0",
         "livewire/flux": "^2.1",
         "livewire/volt": "^1.7.0",
+        "php-flasher/flasher-laravel": "^2.1",
         "smalot/pdfparser": "^2.12",
+        "spatie/pdf-to-image": "^1.2",
         "workos/workos-php-laravel": "^4.1"
     },
     "require-dev": {
@@ -34,7 +36,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -9,11 +9,22 @@ return new class extends Migration {
   {
     Schema::create('answers', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('quiz_attempt_id')->constrained('quiz_attempts')->cascadeOnDelete();
-      $table->foreignId('question_id')->constrained('questions')->cascadeOnDelete();
-      $table->foreignId('option_id')->constrained('options')->cascadeOnDelete();
+
+      $table->foreignId('quiz_attempt_id')
+        ->constrained('quiz_attempts')
+        ->cascadeOnDelete();
+      $table->foreignId('question_id')
+        ->constrained('questions')
+        ->cascadeOnDelete();
+      $table->foreignId('option_id')
+        ->constrained('options')
+        ->cascadeOnDelete();
+
       $table->timestamps();
+
+      // Unicidade e índices para consultas rápidas
       $table->unique(['quiz_attempt_id', 'question_id']);
+      $table->index('option_id');
     });
   }
 

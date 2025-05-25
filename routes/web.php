@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\WorkOS\Http\Middleware\ValidateSessionWithWorkOS;
 use App\Http\Controllers\{
+  OpenAIController,
   QuizController
 };
 
@@ -21,9 +22,16 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function ()
     Route::get('index', [QuizController::class, 'index'])->name('index');
     Route::get('my-quizzes', [QuizController::class, 'myQuizzes'])->name('my-quizzes');
     Route::post('store', [QuizController::class, 'store'])->name('store');
-    Route::get('edit/{id}', [QuizController::class, 'edit'])->name('edit');
+    Route::get('quiz/attempts/{attempt}', [QuizController::class, 'result'])->name('quiz.result');
     Route::put('update/{id}', [QuizController::class, 'update'])->name('update');
     Route::delete('destroy/{id}', [QuizController::class, 'destroy'])->name('destroy');
+  });
+
+  // ===== Open AI ===== //
+  Route::group(['prefix' => 'open-ai/', 'as' => 'open-ai.'], function () {
+    Route::post('/upload', [OpenAIController::class, 'upload'])->name('upload');
+    Route::get('/list', [OpenAIController::class, 'list'])->name('list');
+    Route::delete('/destroy/{id}', [OpenAIController::class, 'destroy'])->name('destroy');
   });
 });
 

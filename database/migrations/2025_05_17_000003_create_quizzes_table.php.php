@@ -10,20 +10,29 @@ return new class extends Migration {
     Schema::create('quizzes', function (Blueprint $table) {
       $table->id();
       $table->string('title');
-      $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-      $table->string('status')->default('draft');
-      $table->string('type')->nullable();
+      $table->foreignId('user_id')
+        ->constrained()
+        ->cascadeOnDelete();
+
       $table->string('category')->nullable();
       $table->string('difficulty')->nullable();
-      $table->string('language')->default('pt');
       $table->string('source')->nullable();
-      $table->string('source_url')->nullable();
       $table->string('model')->default('gpt-4.1-nano');
-      $table->text('content')->nullable();
+      $table->string('chapters')->nullable();
+      $table->integer('number_of_questions')->default(5);
+      $table->json('content')->nullable();
       $table->json('usage')->nullable();
-      $table->softDeletes();
+
       $table->timestamps();
-      $table->index(['user_id', 'status']);
+
+      // Índices para performance
+      $table->index('user_id');
+      $table->index('category');
+      $table->index('difficulty');
+      $table->index('created_at');
+      $table->index(['user_id', 'category']);
+      // Para busca textual em título (opcional)
+      $table->fullText('title');
     });
   }
 

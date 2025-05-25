@@ -1,8 +1,11 @@
-<div class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-  <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
-</div>
-<div class="ms-1 grid flex-1 text-start text-sm">
-  <span class="mb-0.5 truncate leading-none font-semibold">
+<div class="flex items-center space-x-2">
+  {{-- Logo à esquerda --}}
+  <div class="w-18 h-18 flex-shrink-0">
+    <x-app-logo-icon class="w-full h-full fill-current text-white dark:text-black" />
+  </div>
+
+  {{-- Texto à direita --}}
+  <span class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
     Quiz AI
   </span>
 </div>

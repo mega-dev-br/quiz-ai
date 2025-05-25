@@ -10,6 +10,9 @@
 
   {{ $content }}
 
+  @stack('scripts')
+
+  @livewireScripts
 </body>
 
 </html>

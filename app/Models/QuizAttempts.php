@@ -10,7 +10,22 @@ class QuizAttempts extends Model
   use HasFactory;
 
   protected $table = 'quiz_attempts';
-  protected $fillable = ['quiz_id', 'user_id', 'score'];
+
+  protected $fillable = [
+    'quiz_id',
+    'user_id',
+    'score',
+    'option_orders',
+  ];
+
+  protected $casts = [
+    'option_orders' => 'array',
+  ];
+
+  protected $with = [
+    'quiz',
+    'user',
+  ];
 
   public function quiz()
   {

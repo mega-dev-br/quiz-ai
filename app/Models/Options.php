@@ -10,7 +10,16 @@ class Options extends Model
   use HasFactory;
 
   protected $table = 'options';
-  protected $fillable = ['question_id', 'text', 'is_correct'];
+
+  protected $fillable = [
+    'question_id',
+    'text',
+    'is_correct',
+  ];
+
+  protected $casts = [
+    'is_correct' => 'boolean',
+  ];
 
   public function question()
   {

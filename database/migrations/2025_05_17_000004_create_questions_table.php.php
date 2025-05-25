@@ -9,11 +9,24 @@ return new class extends Migration {
   {
     Schema::create('questions', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('quiz_id')->constrained('quizzes')->cascadeOnDelete();
+      $table->foreignId('quiz_id')
+        ->constrained('quizzes')
+        ->cascadeOnDelete();
+
       $table->text('text');
       $table->unsignedInteger('order')->default(0);
+
       $table->timestamps();
+
+      // Índices compostos e únicos para ordenação e integridade
+      $table->unique(['quiz_id', 'order']);
       $table->index(['quiz_id', 'order']);
+
+      // Índice para pesquisar perguntas recentes
+      $table->index('created_at');
+
+      // Full-text para buscar por texto (opcional)
+      $table->fullText('text');
     });
   }
 

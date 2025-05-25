@@ -10,7 +10,12 @@ class Answers extends Model
   use HasFactory;
 
   protected $table = 'answers';
-  protected $fillable = ['quiz_attempt_id', 'question_id', 'option_id'];
+
+  protected $fillable = [
+    'quiz_attempt_id',
+    'question_id',
+    'option_id',
+  ];
 
   public function attempt()
   {

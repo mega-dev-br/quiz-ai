@@ -9,10 +9,18 @@ return new class extends Migration {
   {
     Schema::create('options', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('question_id')->constrained('questions')->cascadeOnDelete();
+      $table->foreignId('question_id')
+        ->constrained('questions')
+        ->cascadeOnDelete();
+
       $table->text('text');
       $table->boolean('is_correct')->default(false);
+
       $table->timestamps();
+
+      // Índices para performance em filtros
+      $table->index('question_id');
+      $table->index('is_correct');
     });
   }
 
